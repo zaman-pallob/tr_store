@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tr_store/core/app_components/app_string.dart';
 
 import '../../core/app_components/app_colors.dart';
+import '../../core/app_components/app_routes.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -25,7 +26,9 @@ class _SplashScreenState extends State<SplashScreen>
     controller.repeat();
 
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
-      Future.delayed(Duration(milliseconds: 1000), () {});
+      Future.delayed(Duration(milliseconds: 1000), () {
+        Navigator.pushReplacementNamed(context, AppRoutes.navigationWindow);
+      });
     });
   }
 
