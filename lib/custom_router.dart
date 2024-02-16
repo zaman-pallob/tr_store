@@ -20,6 +20,7 @@ class CustomRouter {
           create: (context) => HomeProvider(HomeViewModel()),
           child: Home(),
         ));
+
       default:
         return null;
     }

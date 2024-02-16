@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+import 'package:tr_store/core/app_components/app_string.dart';
 import 'package:tr_store/providers/cart/cart_provider.dart';
 
 import '../../providers/app_provider.dart';
@@ -43,7 +44,7 @@ class _CustomAppbarState extends State<CustomAppbar> {
         builder: (context, provider, child) => Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                provider.currentTitle == "Details"
+                provider.currentTitle == AppString.details
                     ? InkWell(
                         onTap: () {
                           Navigator.pop(GlobalVariable.context);
