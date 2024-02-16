@@ -17,7 +17,6 @@ class _NavigationWindowState extends State<NavigationWindow> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: GlobalVariable.scafoldKey,
       appBar: CustomAppbar(),
       bottomNavigationBar: CustomBottomBar(),
       body: MaterialApp(

@@ -1,1 +1,3 @@
-abstract class HomeInterface {}
+abstract class HomeInterface {
+  void onFailed();
+}
