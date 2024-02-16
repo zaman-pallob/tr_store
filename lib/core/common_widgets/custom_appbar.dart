@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+import 'package:tr_store/core/app_components/app_routes.dart';
 import 'package:tr_store/core/app_components/app_string.dart';
 import 'package:tr_store/providers/cart/cart_provider.dart';
 
@@ -55,12 +56,12 @@ class _CustomAppbarState extends State<CustomAppbar> {
                 Text(provider.currentTitle,
                     style: TextStyle(
                         fontSize: 16.sp, fontWeight: FontWeight.w600)),
-                cartButton()
+                cartButton(provider)
               ],
             ));
   }
 
-  Widget cartButton() {
+  Widget cartButton(AppProvider provider) {
     return Row(
       children: [
         Consumer<CartProvider>(
@@ -70,7 +71,13 @@ class _CustomAppbarState extends State<CustomAppbar> {
                     height: 80.h,
                     width: 50.w,
                     child: GestureDetector(
-                        onTap: () async {},
+                        onTap: () async {
+                          Navigator.pushNamedAndRemoveUntil(
+                              GlobalVariable.context,
+                              AppRoutes.cart,
+                              (route) => false);
+                          provider.setCurrentOption(1, AppString.cart);
+                        },
                         child: Icon(
                           Icons.shopping_cart_outlined,
                           color: AppColors.primary,

@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+import 'package:tr_store/providers/cart/cart_provider.dart';
 
 import '../../providers/app_provider.dart';
 import '../app_components/app_colors.dart';
@@ -26,8 +27,12 @@ class CustomBottomBar extends StatelessWidget {
             blurRadius: 2)
       ]),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [iconWidget(icons[0], 0), iconWidget(icons[1], 1)],
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          iconWidget(icons[0], 0),
+          SizedBox(width: 50.w),
+          iconWidget(icons[1], 1)
+        ],
       ),
     );
   }
@@ -55,25 +60,47 @@ class CustomBottomBar extends StatelessWidget {
                         ])
                   : null),
           alignment: Alignment.center,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          child: Stack(
+            alignment: Alignment.topRight,
             children: [
-              Container(
-                  height: 4.h,
-                  width: 50.w,
-                  color: provider.currentOption == index
-                      ? AppColors.primary
-                      : AppColors.transparent),
-              Icon(iconData,
-                  color: provider.currentOption == index
-                      ? AppColors.primary
-                      : AppColors.black.withOpacity(0.6),
-                  size: provider.currentOption == index ? 32.h : 23.h),
-              SizedBox(height: 5.h)
+              Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                        height: 4.h,
+                        width: 50.w,
+                        color: provider.currentOption == index
+                            ? AppColors.primary
+                            : AppColors.transparent),
+                    Icon(iconData,
+                        color: provider.currentOption == index
+                            ? AppColors.primary
+                            : AppColors.black.withOpacity(0.6),
+                        size: provider.currentOption == index ? 32.h : 23.h),
+                    SizedBox(height: 5.h)
+                  ]),
+              index == 0 ? SizedBox.shrink() : itemCount()
             ],
           ),
         ),
       ),
     );
+  }
+
+  Widget itemCount() {
+    return Consumer<CartProvider>(
+        builder: (context, cartprovider, child) => cartprovider.totalItems != 0
+            ? Padding(
+                padding: EdgeInsets.only(left: 10.w, top: 5.h),
+                child: Container(
+                  padding: const EdgeInsets.all(8.0),
+                  decoration: BoxDecoration(
+                      color: AppColors.lightgreen, shape: BoxShape.circle),
+                  child: Text(cartprovider.totalItems.toString(),
+                      style:
+                          TextStyle(fontSize: 10.sp, color: AppColors.white)),
+                ),
+              )
+            : SizedBox.shrink());
   }
 }
