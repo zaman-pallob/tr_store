@@ -33,8 +33,8 @@ class CustomRouter {
 
       case AppRoutes.productDetails:
         return routeBuilder(ChangeNotifierProvider(
-            create: (context) =>
-                ProductDetailsProvider(ProductDetailsViewModel()),
+            create: (context) => ProductDetailsProvider(
+                ProductDetailsViewModel(), arg["product_id"]),
             child: ProductDetails()));
 
       default:

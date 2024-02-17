@@ -5,4 +5,5 @@ class AppString {
   static const addcart = "Add To Cart";
   static const buy = "Buy Now";
   static const product = "Store Products";
+  static const price = "Price";
 }
