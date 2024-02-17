@@ -7,8 +7,11 @@ import 'package:tr_store/database/cart_products/my_cart_dao.dart';
 import 'core/app_components/app_routes.dart';
 import 'core/utils/global_variable.dart';
 import 'custom_router.dart';
+import 'database/fetched_products/fetch_products_dao.dart';
 
 late MyCartDao cartDao;
+late FetchProductsDao dao;
+var db;
 
 class NavigationWindow extends StatefulWidget {
   const NavigationWindow({super.key});
@@ -21,8 +24,9 @@ class _NavigationWindowState extends State<NavigationWindow> {
   @override
   void initState() {
     super.initState();
-    var db = AppDatabase();
+    db = AppDatabase();
     cartDao = MyCartDao(db);
+    dao = FetchProductsDao(db);
     loadCartProducts();
   }
 

@@ -313,33 +313,26 @@ class $FetchProductsTable extends FetchProducts
   static const VerificationMeta _titleMeta = const VerificationMeta('title');
   @override
   late final GeneratedColumn<String> title = GeneratedColumn<String>(
-      'title', aliasedName, false,
-      type: DriftSqlType.string, requiredDuringInsert: true);
+      'title', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
   static const VerificationMeta _priceMeta = const VerificationMeta('price');
   @override
   late final GeneratedColumn<String> price = GeneratedColumn<String>(
-      'price', aliasedName, false,
-      type: DriftSqlType.string, requiredDuringInsert: true);
+      'price', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
   static const VerificationMeta _imageMeta = const VerificationMeta('image');
   @override
   late final GeneratedColumn<String> image = GeneratedColumn<String>(
-      'image', aliasedName, false,
-      type: DriftSqlType.string, requiredDuringInsert: true);
+      'image', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
   static const VerificationMeta _contentMeta =
       const VerificationMeta('content');
   @override
   late final GeneratedColumn<String> content = GeneratedColumn<String>(
-      'content', aliasedName, false,
-      type: DriftSqlType.string, requiredDuringInsert: true);
-  static const VerificationMeta _quantityMeta =
-      const VerificationMeta('quantity');
+      'content', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
   @override
-  late final GeneratedColumn<int> quantity = GeneratedColumn<int>(
-      'quantity', aliasedName, false,
-      type: DriftSqlType.int, requiredDuringInsert: true);
-  @override
-  List<GeneratedColumn> get $columns =>
-      [id, title, price, image, content, quantity];
+  List<GeneratedColumn> get $columns => [id, title, price, image, content];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
@@ -356,32 +349,18 @@ class $FetchProductsTable extends FetchProducts
     if (data.containsKey('title')) {
       context.handle(
           _titleMeta, title.isAcceptableOrUnknown(data['title']!, _titleMeta));
-    } else if (isInserting) {
-      context.missing(_titleMeta);
     }
     if (data.containsKey('price')) {
       context.handle(
           _priceMeta, price.isAcceptableOrUnknown(data['price']!, _priceMeta));
-    } else if (isInserting) {
-      context.missing(_priceMeta);
     }
     if (data.containsKey('image')) {
       context.handle(
           _imageMeta, image.isAcceptableOrUnknown(data['image']!, _imageMeta));
-    } else if (isInserting) {
-      context.missing(_imageMeta);
     }
     if (data.containsKey('content')) {
       context.handle(_contentMeta,
           content.isAcceptableOrUnknown(data['content']!, _contentMeta));
-    } else if (isInserting) {
-      context.missing(_contentMeta);
-    }
-    if (data.containsKey('quantity')) {
-      context.handle(_quantityMeta,
-          quantity.isAcceptableOrUnknown(data['quantity']!, _quantityMeta));
-    } else if (isInserting) {
-      context.missing(_quantityMeta);
     }
     return context;
   }
@@ -395,15 +374,13 @@ class $FetchProductsTable extends FetchProducts
       id: attachedDatabase.typeMapping
           .read(DriftSqlType.int, data['${effectivePrefix}id']),
       title: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}title'])!,
+          .read(DriftSqlType.string, data['${effectivePrefix}title']),
       price: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}price'])!,
+          .read(DriftSqlType.string, data['${effectivePrefix}price']),
       image: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}image'])!,
+          .read(DriftSqlType.string, data['${effectivePrefix}image']),
       content: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}content'])!,
-      quantity: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}quantity'])!,
+          .read(DriftSqlType.string, data['${effectivePrefix}content']),
     );
   }
 
@@ -416,40 +393,45 @@ class $FetchProductsTable extends FetchProducts
 class FetchProductsModel extends DataClass
     implements Insertable<FetchProductsModel> {
   final int? id;
-  final String title;
-  final String price;
-  final String image;
-  final String content;
-  final int quantity;
+  final String? title;
+  final String? price;
+  final String? image;
+  final String? content;
   const FetchProductsModel(
-      {this.id,
-      required this.title,
-      required this.price,
-      required this.image,
-      required this.content,
-      required this.quantity});
+      {this.id, this.title, this.price, this.image, this.content});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     if (!nullToAbsent || id != null) {
       map['id'] = Variable<int>(id);
     }
-    map['title'] = Variable<String>(title);
-    map['price'] = Variable<String>(price);
-    map['image'] = Variable<String>(image);
-    map['content'] = Variable<String>(content);
-    map['quantity'] = Variable<int>(quantity);
+    if (!nullToAbsent || title != null) {
+      map['title'] = Variable<String>(title);
+    }
+    if (!nullToAbsent || price != null) {
+      map['price'] = Variable<String>(price);
+    }
+    if (!nullToAbsent || image != null) {
+      map['image'] = Variable<String>(image);
+    }
+    if (!nullToAbsent || content != null) {
+      map['content'] = Variable<String>(content);
+    }
     return map;
   }
 
   FetchProductsCompanion toCompanion(bool nullToAbsent) {
     return FetchProductsCompanion(
       id: id == null && nullToAbsent ? const Value.absent() : Value(id),
-      title: Value(title),
-      price: Value(price),
-      image: Value(image),
-      content: Value(content),
-      quantity: Value(quantity),
+      title:
+          title == null && nullToAbsent ? const Value.absent() : Value(title),
+      price:
+          price == null && nullToAbsent ? const Value.absent() : Value(price),
+      image:
+          image == null && nullToAbsent ? const Value.absent() : Value(image),
+      content: content == null && nullToAbsent
+          ? const Value.absent()
+          : Value(content),
     );
   }
 
@@ -458,11 +440,10 @@ class FetchProductsModel extends DataClass
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return FetchProductsModel(
       id: serializer.fromJson<int?>(json['id']),
-      title: serializer.fromJson<String>(json['title']),
-      price: serializer.fromJson<String>(json['price']),
-      image: serializer.fromJson<String>(json['image']),
-      content: serializer.fromJson<String>(json['content']),
-      quantity: serializer.fromJson<int>(json['quantity']),
+      title: serializer.fromJson<String?>(json['title']),
+      price: serializer.fromJson<String?>(json['price']),
+      image: serializer.fromJson<String?>(json['image']),
+      content: serializer.fromJson<String?>(json['content']),
     );
   }
   @override
@@ -470,28 +451,25 @@ class FetchProductsModel extends DataClass
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
       'id': serializer.toJson<int?>(id),
-      'title': serializer.toJson<String>(title),
-      'price': serializer.toJson<String>(price),
-      'image': serializer.toJson<String>(image),
-      'content': serializer.toJson<String>(content),
-      'quantity': serializer.toJson<int>(quantity),
+      'title': serializer.toJson<String?>(title),
+      'price': serializer.toJson<String?>(price),
+      'image': serializer.toJson<String?>(image),
+      'content': serializer.toJson<String?>(content),
     };
   }
 
   FetchProductsModel copyWith(
           {Value<int?> id = const Value.absent(),
-          String? title,
-          String? price,
-          String? image,
-          String? content,
-          int? quantity}) =>
+          Value<String?> title = const Value.absent(),
+          Value<String?> price = const Value.absent(),
+          Value<String?> image = const Value.absent(),
+          Value<String?> content = const Value.absent()}) =>
       FetchProductsModel(
         id: id.present ? id.value : this.id,
-        title: title ?? this.title,
-        price: price ?? this.price,
-        image: image ?? this.image,
-        content: content ?? this.content,
-        quantity: quantity ?? this.quantity,
+        title: title.present ? title.value : this.title,
+        price: price.present ? price.value : this.price,
+        image: image.present ? image.value : this.image,
+        content: content.present ? content.value : this.content,
       );
   @override
   String toString() {
@@ -500,14 +478,13 @@ class FetchProductsModel extends DataClass
           ..write('title: $title, ')
           ..write('price: $price, ')
           ..write('image: $image, ')
-          ..write('content: $content, ')
-          ..write('quantity: $quantity')
+          ..write('content: $content')
           ..write(')'))
         .toString();
   }
 
   @override
-  int get hashCode => Object.hash(id, title, price, image, content, quantity);
+  int get hashCode => Object.hash(id, title, price, image, content);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -516,17 +493,15 @@ class FetchProductsModel extends DataClass
           other.title == this.title &&
           other.price == this.price &&
           other.image == this.image &&
-          other.content == this.content &&
-          other.quantity == this.quantity);
+          other.content == this.content);
 }
 
 class FetchProductsCompanion extends UpdateCompanion<FetchProductsModel> {
   final Value<int?> id;
-  final Value<String> title;
-  final Value<String> price;
-  final Value<String> image;
-  final Value<String> content;
-  final Value<int> quantity;
+  final Value<String?> title;
+  final Value<String?> price;
+  final Value<String?> image;
+  final Value<String?> content;
   final Value<int> rowid;
   const FetchProductsCompanion({
     this.id = const Value.absent(),
@@ -534,29 +509,22 @@ class FetchProductsCompanion extends UpdateCompanion<FetchProductsModel> {
     this.price = const Value.absent(),
     this.image = const Value.absent(),
     this.content = const Value.absent(),
-    this.quantity = const Value.absent(),
     this.rowid = const Value.absent(),
   });
   FetchProductsCompanion.insert({
     this.id = const Value.absent(),
-    required String title,
-    required String price,
-    required String image,
-    required String content,
-    required int quantity,
+    this.title = const Value.absent(),
+    this.price = const Value.absent(),
+    this.image = const Value.absent(),
+    this.content = const Value.absent(),
     this.rowid = const Value.absent(),
-  })  : title = Value(title),
-        price = Value(price),
-        image = Value(image),
-        content = Value(content),
-        quantity = Value(quantity);
+  });
   static Insertable<FetchProductsModel> custom({
     Expression<int>? id,
     Expression<String>? title,
     Expression<String>? price,
     Expression<String>? image,
     Expression<String>? content,
-    Expression<int>? quantity,
     Expression<int>? rowid,
   }) {
     return RawValuesInsertable({
@@ -565,18 +533,16 @@ class FetchProductsCompanion extends UpdateCompanion<FetchProductsModel> {
       if (price != null) 'price': price,
       if (image != null) 'image': image,
       if (content != null) 'content': content,
-      if (quantity != null) 'quantity': quantity,
       if (rowid != null) 'rowid': rowid,
     });
   }
 
   FetchProductsCompanion copyWith(
       {Value<int?>? id,
-      Value<String>? title,
-      Value<String>? price,
-      Value<String>? image,
-      Value<String>? content,
-      Value<int>? quantity,
+      Value<String?>? title,
+      Value<String?>? price,
+      Value<String?>? image,
+      Value<String?>? content,
       Value<int>? rowid}) {
     return FetchProductsCompanion(
       id: id ?? this.id,
@@ -584,7 +550,6 @@ class FetchProductsCompanion extends UpdateCompanion<FetchProductsModel> {
       price: price ?? this.price,
       image: image ?? this.image,
       content: content ?? this.content,
-      quantity: quantity ?? this.quantity,
       rowid: rowid ?? this.rowid,
     );
   }
@@ -607,9 +572,6 @@ class FetchProductsCompanion extends UpdateCompanion<FetchProductsModel> {
     if (content.present) {
       map['content'] = Variable<String>(content.value);
     }
-    if (quantity.present) {
-      map['quantity'] = Variable<int>(quantity.value);
-    }
     if (rowid.present) {
       map['rowid'] = Variable<int>(rowid.value);
     }
@@ -624,7 +586,6 @@ class FetchProductsCompanion extends UpdateCompanion<FetchProductsModel> {
           ..write('price: $price, ')
           ..write('image: $image, ')
           ..write('content: $content, ')
-          ..write('quantity: $quantity, ')
           ..write('rowid: $rowid')
           ..write(')'))
         .toString();

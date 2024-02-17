@@ -2,6 +2,8 @@ import 'package:tr_store/models/product_model.dart';
 import 'package:tr_store/providers/product_details/productdetails_interface.dart';
 import 'package:tr_store/repository/product_repo.dart';
 
+import '../../navigation_window.dart';
+
 class ProductDetailsViewModel {
   late ProductDetailsInterface interface;
   ProductRepo repo = ProductRepo();
@@ -14,7 +16,11 @@ class ProductDetailsViewModel {
       if (value.isSuccess) {
         ProductModel model = value.object as ProductModel;
         interface.onDetailsFetched(model);
-      } else {}
+      } else {
+        dao.getProduct(int.parse(productId)).then((model) {
+          interface.onDetailsFetched(model);
+        });
+      }
     });
   }
 }
