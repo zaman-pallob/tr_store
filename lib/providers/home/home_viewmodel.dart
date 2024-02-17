@@ -16,6 +16,7 @@ class HomeViewModel {
     await repo.getProducts().then((value) {
       if (value.isSuccess) {
         List<ProductModel> products = value.object as List<ProductModel>;
+        interface.onProductsFetched(products);
       } else {}
     });
   }
