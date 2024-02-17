@@ -26,3 +26,9 @@ void addProductToCart(CartProduct cartProduct) {
 
   GlobalVariable.cartStream.sink.add(list);
 }
+
+void removeProductFromCart(String id) {
+  List<CartProduct> list = GlobalVariable.cartStream.value;
+  list.removeWhere((element) => element.id == id);
+  GlobalVariable.cartStream.sink.add(list);
+}

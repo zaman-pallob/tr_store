@@ -10,8 +10,14 @@ class CachedImage extends StatelessWidget {
   double? width, height;
   BoxFit? boxFit;
   String? placeHolder;
+  double? borderRadius;
   CachedImage(
-      {this.url, this.height, this.width, this.boxFit, this.placeHolder});
+      {this.url,
+      this.height,
+      this.width,
+      this.boxFit,
+      this.placeHolder,
+      this.borderRadius});
 
   @override
   Widget build(BuildContext context) {
@@ -21,6 +27,7 @@ class CachedImage extends StatelessWidget {
       width: width,
       imageBuilder: (context, imageProvider) => Container(
         decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(borderRadius ?? 0.0),
           image: DecorationImage(
             image: imageProvider,
             fit: boxFit ?? BoxFit.contain,

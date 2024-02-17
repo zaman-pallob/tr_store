@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import 'package:tr_store/core/utils/item_counter.dart';
+import 'package:tr_store/core/utils/cart_product_handler.dart';
 
 import '../../providers/app_provider.dart';
 import '../app_components/app_colors.dart';

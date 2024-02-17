@@ -3,5 +3,6 @@ class CartProduct {
   String name;
   int quantity;
   String price;
-  CartProduct(this.id, this.name, this.price, this.quantity);
+  String image;
+  CartProduct(this.id, this.name, this.price, this.quantity, this.image);
 }

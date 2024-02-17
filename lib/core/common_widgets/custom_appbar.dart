@@ -8,7 +8,7 @@ import 'package:tr_store/core/app_components/app_string.dart';
 import '../../providers/app_provider.dart';
 import '../app_components/app_colors.dart';
 import '../utils/global_variable.dart';
-import '../utils/item_counter.dart';
+import '../utils/cart_product_handler.dart';
 
 class CustomAppbar extends StatefulWidget implements PreferredSizeWidget {
   @override
@@ -101,7 +101,7 @@ class _CustomAppbarState extends State<CustomAppbar> {
                     : SizedBox.shrink()
               ]);
             }),
-        SizedBox(width: 15.w)
+        SizedBox(width: 10.w)
       ],
     );
   }
