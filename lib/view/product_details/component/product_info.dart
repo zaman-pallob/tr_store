@@ -2,6 +2,7 @@ import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+import 'package:tr_store/core/app_components/app_colors.dart';
 import 'package:tr_store/core/app_components/app_string.dart';
 import 'package:tr_store/providers/product_details/product_detailsprovider.dart';
 
@@ -46,9 +47,12 @@ class ProductInfo extends StatelessWidget {
                                       style: TextStyle(fontSize: 13.sp)),
                                 ),
                               ),
-                              Text(controller!.expanded
-                                  ? "Show less"
-                                  : "Show More.."),
+                              Text(
+                                controller!.expanded
+                                    ? "Show less"
+                                    : "Show More..",
+                                style: TextStyle(color: AppColors.blue_cobalt),
+                              ),
                             ],
                           ),
                         ),

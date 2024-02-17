@@ -18,4 +18,5 @@ class AppColors {
   static Color shimmerbase = Colors.grey.shade500;
   static Color shimmerhighlighted = Colors.grey.shade700;
   static Color secondary = Color(0xFFF9F9F9);
+  static const Color blue_cobalt = Color(0xFF0047AB);
 }
