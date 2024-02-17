@@ -14,7 +14,7 @@ import '../utils/global_variable.dart';
 class CustomBottomBar extends StatelessWidget {
   List<IconData> icons = [Icons.home_outlined, Icons.shopping_cart_outlined];
   List<String> routes = [AppRoutes.home, AppRoutes.cart];
-  List<String> title = ["", AppString.cart];
+  List<String> title = [AppString.product, AppString.cart];
   @override
   Widget build(BuildContext context) {
     return Container(
