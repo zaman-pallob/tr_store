@@ -3,8 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:tr_store/custom_router.dart';
-import 'package:tr_store/providers/cart/cart_provider.dart';
-import 'package:tr_store/providers/cart/cart_viewmodel.dart';
 
 import 'core/app_components/app_colors.dart';
 import 'core/app_components/app_routes.dart';
@@ -29,8 +27,6 @@ class _MyAppState extends State<MyApp> {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => AppProvider()),
-        ChangeNotifierProvider(
-            create: (context) => CartProvider(CartViewmodel()))
       ],
       child: ScreenUtilInit(
           minTextAdapt: true,

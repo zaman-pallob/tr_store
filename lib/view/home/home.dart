@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
-import 'package:tr_store/core/app_components/app_colors.dart';
 import 'package:tr_store/core/common_widgets/product_grid_shimmer.dart';
 import 'package:tr_store/providers/home/home_provider.dart';
 import 'package:tr_store/view/home/components/product_card.dart';
@@ -32,11 +30,7 @@ class _HomeState extends State<Home> {
             var ob = provider.products[index];
             return ProductCard(
                 onTapAdd: () {
-                  Fluttertoast.showToast(
-                      msg: "Product added to cart",
-                      gravity: ToastGravity.CENTER,
-                      textColor: AppColors.white,
-                      backgroundColor: AppColors.primary);
+                  provider.addProduct(index);
                 },
                 onTapBuy: () {},
                 name: ob.title ?? "",

@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import 'package:tr_store/providers/cart/cart_provider.dart';
+import 'package:tr_store/core/utils/cart_product_handler.dart';
 
 import '../../providers/app_provider.dart';
 import '../app_components/app_colors.dart';
@@ -88,19 +88,25 @@ class CustomBottomBar extends StatelessWidget {
   }
 
   Widget itemCount() {
-    return Consumer<CartProvider>(
-        builder: (context, cartprovider, child) => cartprovider.totalItems != 0
-            ? Padding(
-                padding: EdgeInsets.only(left: 10.w, top: 5.h),
-                child: Container(
-                  padding: const EdgeInsets.all(8.0),
-                  decoration: BoxDecoration(
-                      color: AppColors.lightgreen, shape: BoxShape.circle),
-                  child: Text(cartprovider.totalItems.toString(),
-                      style:
-                          TextStyle(fontSize: 10.sp, color: AppColors.white)),
-                ),
-              )
-            : SizedBox.shrink());
+    return StreamBuilder(
+      stream: GlobalVariable.cartStream,
+      builder: (context, snapshot) {
+        int totalItems = getTotalItems(snapshot.data ?? []);
+        if (totalItems != 0) {
+          return Padding(
+            padding: EdgeInsets.only(left: 10.w, top: 5.h),
+            child: Container(
+              padding: const EdgeInsets.all(8.0),
+              decoration: BoxDecoration(
+                  color: AppColors.lightgreen, shape: BoxShape.circle),
+              child: Text(totalItems.toString(),
+                  style: TextStyle(fontSize: 10.sp, color: AppColors.white)),
+            ),
+          );
+        } else {
+          return SizedBox.shrink();
+        }
+      },
+    );
   }
 }

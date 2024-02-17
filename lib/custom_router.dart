@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tr_store/core/app_components/app_routes.dart';
 import 'package:tr_store/navigation_window.dart';
+import 'package:tr_store/providers/cart/cart_provider.dart';
+import 'package:tr_store/providers/cart/cart_viewmodel.dart';
 import 'package:tr_store/providers/home/home_provider.dart';
 import 'package:tr_store/providers/home/home_viewmodel.dart';
 import 'package:tr_store/providers/product_details/product_details_viewmodel.dart';
@@ -26,7 +28,8 @@ class CustomRouter {
         ));
 
       case AppRoutes.cart:
-        return routeBuilder(Cart());
+        return routeBuilder(ChangeNotifierProvider(
+            create: (context) => CartProvider(CartViewmodel()), child: Cart()));
 
       case AppRoutes.productDetails:
         return routeBuilder(ChangeNotifierProvider(
