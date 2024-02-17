@@ -1,8 +1,16 @@
 // ignore_for_file: unused_local_variable
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:tr_store/core/app_components/app_routes.dart';
 import 'package:tr_store/navigation_window.dart';
+import 'package:tr_store/providers/home/home_provider.dart';
+import 'package:tr_store/providers/home/home_viewmodel.dart';
+import 'package:tr_store/providers/product_details/product_details_viewmodel.dart';
+import 'package:tr_store/providers/product_details/product_detailsprovider.dart';
+import 'package:tr_store/view/cart/cart.dart';
+import 'package:tr_store/view/home/home.dart';
+import 'package:tr_store/view/product_details/product_details.dart';
 
 class CustomRouter {
   static Route<dynamic>? onGenerateRoute(RouteSettings settings) {
@@ -10,6 +18,22 @@ class CustomRouter {
     switch (settings.name) {
       case AppRoutes.navigationWindow:
         return routeBuilder(NavigationWindow());
+
+      case AppRoutes.home:
+        return routeBuilder(ChangeNotifierProvider(
+          create: (context) => HomeProvider(HomeViewModel()),
+          child: Home(),
+        ));
+
+      case AppRoutes.cart:
+        return routeBuilder(Cart());
+
+      case AppRoutes.productDetails:
+        return routeBuilder(ChangeNotifierProvider(
+            create: (context) =>
+                ProductDetailsProvider(ProductDetailsViewModel()),
+            child: ProductDetails()));
+
       default:
         return null;
     }

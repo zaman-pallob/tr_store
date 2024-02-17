@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:tr_store/custom_router.dart';
 import 'package:tr_store/providers/cart/cart_provider.dart';
+import 'package:tr_store/providers/cart/cart_viewmodel.dart';
 
 import 'core/app_components/app_colors.dart';
 import 'core/app_components/app_routes.dart';
@@ -17,13 +18,19 @@ void main() async {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => AppProvider()),
-        ChangeNotifierProvider(create: (context) => CartProvider())
+        ChangeNotifierProvider(
+            create: (context) => CartProvider(CartViewmodel()))
       ],
       child: ScreenUtilInit(
           minTextAdapt: true,
