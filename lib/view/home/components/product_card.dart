@@ -2,9 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:tr_store/core/app_components/app_string.dart';
 
 import '../../../core/app_components/app_colors.dart';
+import '../../../core/app_components/app_string.dart';
 import '../../../core/common_widgets/cached_image.dart';
 
 class ProductCard extends StatelessWidget {
@@ -12,19 +12,22 @@ class ProductCard extends StatelessWidget {
   String imageUrl;
   String price;
   String productId;
-  Function onTapBuy, onTapAdd;
+  Function onTapBuy, onTapAdd, onViewDetails;
   ProductCard(
       {required this.name,
       required this.price,
       required this.imageUrl,
       required this.productId,
       required this.onTapAdd,
+      required this.onViewDetails,
       required this.onTapBuy});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        onViewDetails();
+      },
       child: Container(
         padding: EdgeInsets.only(top: 10.h),
         decoration: BoxDecoration(boxShadow: [
