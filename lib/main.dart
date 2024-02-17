@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+import 'package:tr_store/core/utils/database_helper.dart';
 import 'package:tr_store/custom_router.dart';
 
 import 'core/app_components/app_colors.dart';
@@ -12,6 +13,8 @@ import 'providers/app_provider.dart';
 import 'view/splashscreen/splash_screen.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await DatabaseHelper.initialize();
   await MyClient.initializeDio();
   runApp(MyApp());
 }
