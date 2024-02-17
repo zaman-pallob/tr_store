@@ -1,6 +1,6 @@
 import 'package:tr_store/core/utils/global_variable.dart';
-
 import '../../models/cart_product.dart';
+import '../../navigation_window.dart';
 
 int getTotalItems(List<CartProduct> products) {
   int counter = 0;
@@ -11,7 +11,7 @@ int getTotalItems(List<CartProduct> products) {
   return counter;
 }
 
-void addProductToCart(CartProduct cartProduct) {
+Future addProductToCart(CartProduct cartProduct) async {
   bool wasAdded = false;
   List<CartProduct> list = GlobalVariable.cartStream.value;
   list.forEach((element) {
@@ -25,10 +25,12 @@ void addProductToCart(CartProduct cartProduct) {
   }
 
   GlobalVariable.cartStream.sink.add(list);
+  await cartDao.addCartProduct(list);
 }
 
-void removeProductFromCart(String id) {
+Future removeProductFromCart(String id) async {
   List<CartProduct> list = GlobalVariable.cartStream.value;
   list.removeWhere((element) => element.id == id);
   GlobalVariable.cartStream.sink.add(list);
+  await cartDao.removeProduct(id);
 }

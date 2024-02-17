@@ -22,6 +22,8 @@ class CustomInterceptors implements Interceptor {
 
     if (err.type == DioExceptionType.unknown) {
       handler.reject(DioException(requestOptions: RequestOptions(path: "")));
+    } else {
+      handler.next(err);
     }
   }
 

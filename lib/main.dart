@@ -12,6 +12,7 @@ import 'providers/app_provider.dart';
 import 'view/splashscreen/splash_screen.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await MyClient.initializeDio();
   runApp(MyApp());
 }
