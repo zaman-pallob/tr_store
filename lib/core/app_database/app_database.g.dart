@@ -635,6 +635,9 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(e);
   late final $MyCartProductsTable myCartProducts = $MyCartProductsTable(this);
   late final $FetchProductsTable fetchProducts = $FetchProductsTable(this);
+  late final MyCartDao myCartDao = MyCartDao(this as AppDatabase);
+  late final FetchProductsDao fetchProductsDao =
+      FetchProductsDao(this as AppDatabase);
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
