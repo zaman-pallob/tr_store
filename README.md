@@ -1,16 +1,12 @@
-# tr_store
+# Tr_Store
 
-A new Flutter project.
+A flutter assignment project.
 
-## Getting Started
+- [Download The App](https://drive.google.com/file/d/1LjFneQspepFBOecGS_s-Gu22EE55YdCz/view?usp=sharing)
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+# Running The Application
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- Clone code from the main branch into your ide
+- Use " flutter run "  command for running the app on your device or emulator 
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
